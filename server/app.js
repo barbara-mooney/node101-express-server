@@ -1,10 +1,20 @@
-// import files and packages up here
+const express = require('express');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const topSpotsData = require('../server/data.json');
 
+const app = express();
 
-// create your express server below
-var app;
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-// add your routes and middleware below
+app.get('/', function(req, res, next) {
+  res.status(200).send('Hello world');
+})
 
-// finally export the express application
+app.get('/data', function(req, res, next) {
+  res.json(topSpotsData);
+})
+
 module.exports = app;
